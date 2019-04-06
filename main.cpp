@@ -2,17 +2,17 @@
 #include <iostream>
 #include <string>
 #include "helper.h"
+#include "fileHelp.h"
 using namespace std;
 
 int main(int argc, char **argv) {
-    cout << argv[1] << endl;
     string line;
     ifstream myfile(argv[1]);
-    ofstream myfile2("middle.asm");
+    ofstream middlefile("middle.asm");
     if(myfile.is_open()) {
         while(getline(myfile,line)) {
-            if(emptyLine(line) == false && !(line[0] == '/' && line[1] == '/')) {
-                myfile2 << line << endl;
+            if(emptyLine(line) == false && !(isComment(line))) {
+                middlefile << line << endl;
                 //Add to file?
             }
             else {
@@ -21,6 +21,20 @@ int main(int argc, char **argv) {
             
         }
         myfile.close();
-        myfile2.close();
+        middlefile.close();
+    }
+    ifstream middlefile2("middle.asm");
+    string finalfile = changefilename(argv[1]);
+    ofstream outfile(finalfile);
+    string line2;
+    if(middlefile2.is_open()) {
+        while(getline(middlefile2,line2)) {
+            string binaryTransform;
+            if(isAinstruction(line2)) {
+                binaryTransform = transformAinstruction(line2);
+                outfile << binaryTransform << "\n";
+            }
+            //else if isCinstruction()
+        }
     }
 }

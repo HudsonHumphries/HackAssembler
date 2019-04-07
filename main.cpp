@@ -1,8 +1,9 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include "helper.h"
 #include "fileHelp.h"
+#include "ainsHelp.h"
+#include "cinsHelp.h"
 using namespace std;
 
 int main(int argc, char **argv) {

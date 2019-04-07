@@ -13,6 +13,7 @@ class cinsHelp {
         bool isCompBits(string cstring);
         bool isDestBits(string dstring);
         bool isJumpBits(string jstring);
+        void split(string instruction);
         bool isCinstruction(string instruction);
         string CinstructionToBits();
 

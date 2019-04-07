@@ -72,59 +72,120 @@ bool cinsHelp::isJumpBits(string jstring) {
         return false;
     }
 }
-
-bool cinsHelp::isCinstruction(string instruction) {
-    compstring = "";
-    deststring = "";
-    jumpstring = "";
-    int i;
-    i = 0;
-    while(instruction[i] != '=' && instruction[i] != ';') {
-        deststring += instruction[i];
-        i++;
+void cinsHelp::split(string instruction) {
+    //Test to see which of our strings should be present in the line
+    bool equals = false;
+    bool semicolon = false;
+    for(int i = 0; i < instruction.size(); i++) {
+        if(instruction[i] == '=') equals = true;
+        if(instruction[i] == ';') semicolon = true;
     }
-    int j;
-    j = i;
-    if(instruction[j] == '=') {
-        j++;
-        //This means that there is a comp feature
-        while(instruction[j] != '\0'){
-            if(instruction[j] == ';') {
-                break;
-            }
-            compstring += instruction[j];
-            j++;
+    //If both are true, then there should be all 3 in the string
+    if(equals && semicolon) {
+        int i;
+        i = 0;
+        while(instruction[i] != '=' && instruction[i] != ';') {
+            deststring += instruction[i];
+            i++;
         }
-        if(instruction[j]==';') {
+        int j;
+        j = i;
+        if(instruction[j] == '=') {
             j++;
-            //There is a jump and comp
-            while(instruction[j] != '\0') {
+            //This means that there is a comp feature
+            while(instruction[j] != '\0'){
+                if(instruction[j] == ';') {
+                    break;
+                }
+                compstring += instruction[j];
+                j++;
+            }
+            if(instruction[j]==';') {
+                j++;
+                //There is a jump and comp
+                while(instruction[j] != '\0') {
+                    jumpstring += instruction[j];
+                    j++;
+                }
+
+            }
+        }
+        else if(instruction[j] = ';') {
+            //This means that there is only a dest and a jump in the Cinstruction
+            j++;
+            while(instruction[j] != '\0'){
+                jumpstring += instruction[j];
+                j++;
+            }
+        }
+        else {
+            //This means there is no comp or jump
+
+        }
+    }
+    else if(equals && !semicolon) { //There is an equals sigh and no semicolon, meaning there should be no JUMP
+        int i = 0;
+        while(instruction[i] != '=') {
+            deststring += instruction[i];
+            i++;
+        }
+        int j;
+        j = i;
+        if(instruction[j] == '=') {
+            j++;
+            //This means that there is a comp feature
+            while(instruction[j] != '\0'){
+                compstring += instruction[j];
+                j++;
+            }
+
+        }
+    }
+    else if(semicolon && !equals) { //There is no equals and a semicolon, so there is no dest only a comp and a JUMP
+        int i = 0;
+        while(instruction[i] != ';') {
+            compstring += instruction[i];
+            i++;
+        }
+        int j;
+        j = i;
+        if(instruction[j] == ';') {
+            j++;
+            //This means that there is a comp feature
+            while(instruction[j] != '\0'){
                 jumpstring += instruction[j];
                 j++;
             }
 
         }
     }
-    else if(instruction[j] = ';') {
-        //This means that there is only a dest and a jump in the Cinstruction
-        j++;
-        while(instruction[j] != '\0'){
-            jumpstring += instruction[j];
-            j++;
-        }
-    }
-    else {
-        //This means there is no comp or jump
-        return false;
+    
+}
+//need to check between jump or not, if there is no equals then there is only a comp and jump
+bool cinsHelp::isCinstruction(string instruction) {
+    compstring = "";
+    deststring = "";
+    jumpstring = "";
+    split(instruction);
 
-    }
     if(isspace(compstring[compstring.size()-1])) compstring.pop_back();
     if(isspace(jumpstring[jumpstring.size()-1])) jumpstring.pop_back();
     if(isspace(deststring[deststring.size()-1])) deststring.pop_back();
+    /*
+    Code was previously needed to trim bad algorithm, will keep here just incase it is needed
+    if(jumpstring[0] == ';') {
+        for(int i = 0; i < jumpstring.size()-1; i++){
+            jumpstring[i] = jumpstring[i+1];
+        }
+        jumpstring.pop_back();
+    } */
+    /*cout << "comp: " << compstring << " " << compstring.size() << endl;
+    cout << "jump: " << jumpstring << " " << jumpstring.size() << endl;
+    cout << "dest: " << deststring << " " << deststring.size() << endl; */
 
     if(isCompBits(compstring) && isJumpBits(jumpstring) && isDestBits(deststring)) return true;
 
-    return false;
+    return true;
 }
 
 string cinsHelp::CinstructionToBits() {

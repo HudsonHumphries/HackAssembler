@@ -38,6 +38,7 @@ int main(int argc, char **argv) {
             }
             else if(c.isCinstruction(line2)){
                 outfile << c.CinstructionToBits() << endl;
+                cout << c.CinstructionToBits() << endl;
             }
             else {
                 cerr << "A line was not a A or C instruction" << endl;

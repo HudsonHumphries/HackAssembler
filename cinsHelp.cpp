@@ -159,6 +159,10 @@ void cinsHelp::split(string instruction) {
 
         }
     }
+    //Was running into some issues with strings adding a space to the end, so I made this to make sure there is no extra space
+    if(isspace(compstring[compstring.size()-1])) compstring.pop_back();
+    if(isspace(jumpstring[jumpstring.size()-1])) jumpstring.pop_back();
+    if(isspace(deststring[deststring.size()-1])) deststring.pop_back();
     
 }
 //need to check between jump or not, if there is no equals then there is only a comp and jump
@@ -168,20 +172,9 @@ bool cinsHelp::isCinstruction(string instruction) {
     jumpstring = "";
     split(instruction);
 
-    if(isspace(compstring[compstring.size()-1])) compstring.pop_back();
-    if(isspace(jumpstring[jumpstring.size()-1])) jumpstring.pop_back();
-    if(isspace(deststring[deststring.size()-1])) deststring.pop_back();
-    /*
-    Code was previously needed to trim bad algorithm, will keep here just incase it is needed
-    if(jumpstring[0] == ';') {
-        for(int i = 0; i < jumpstring.size()-1; i++){
-            jumpstring[i] = jumpstring[i+1];
-        }
-        jumpstring.pop_back();
-    } */
-    /*cout << "comp: " << compstring << " " << compstring.size() << endl;
+    cout << "comp: " << compstring << " " << compstring.size() << endl;
     cout << "jump: " << jumpstring << " " << jumpstring.size() << endl;
-    cout << "dest: " << deststring << " " << deststring.size() << endl; */
+    cout << "dest: " << deststring << " " << deststring.size() << endl; 
 
     if(isCompBits(compstring) && isJumpBits(jumpstring) && isDestBits(deststring)) return true;
 

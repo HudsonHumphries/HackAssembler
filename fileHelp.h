@@ -29,4 +29,19 @@ bool isComment(string line) {
     }
     return false;
 }
+//Function that removes spaces and comments from line
+string removeSpacesAndComments(string line) {
+    int i = 0;
+    string res;
+    while(i < line.size()) {
+        if((i<line.size()-1) && (line[i] == '/' && line[i+1] == '/')){ //If there is a comment and it doesn't go out of range, will end whileloop
+            break;
+        }
+        else if(line[i] != ' ') {
+            res.push_back(line[i]);
+        }
+        i++;
+    }
+    return res; 
+}
 

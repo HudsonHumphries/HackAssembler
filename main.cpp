@@ -12,8 +12,10 @@ int main(int argc, char **argv) {
     ofstream middlefile("middle.asm");
     if(myfile.is_open()) {
         while(getline(myfile,line)) {
+            string myString = removeSpacesAndComments(line);
             if(emptyLine(line) == false && !(isComment(line))) {
-                middlefile << line << endl;
+                middlefile << myString << endl;
+                cout << myString << endl;
                 //Add to file?
             }
             else {

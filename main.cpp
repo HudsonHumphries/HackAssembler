@@ -24,6 +24,7 @@ int main(int argc, char **argv) {
         myfile.close();
         middlefile.close();
     }
+    cinsHelp c;
     ifstream middlefile2("middle.asm");
     string finalfile = changefilename(argv[1]);
     ofstream outfile(finalfile);
@@ -35,7 +36,12 @@ int main(int argc, char **argv) {
                 binaryTransform = transformAinstruction(line2);
                 outfile << binaryTransform << "\n";
             }
-            //else if isCinstruction()
+            else if(c.isCinstruction(line2)){
+                cout << "CINSTRUCTION" << endl;
+            }
+            else {
+                cout << "NOTCORA" << endl;
+            }
         }
     }
 }

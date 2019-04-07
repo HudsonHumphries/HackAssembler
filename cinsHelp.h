@@ -14,6 +14,7 @@ class cinsHelp {
         bool isDestBits(string dstring);
         bool isJumpBits(string jstring);
         bool isCinstruction(string instruction);
+        string CinstructionToBits();
 
     private:
         unordered_map<string,string> dest;

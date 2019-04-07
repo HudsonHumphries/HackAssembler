@@ -6,9 +6,9 @@ using namespace std;
 
 cinsHelp::cinsHelp() {
     dest[""] = "000";
-    dest["M"] = "010";
-    dest["D"] = "011";
-    dest["MD"] = "100";
+    dest["M"] = "001";
+    dest["D"] = "010";
+    dest["MD"] = "011";
     dest["A"] = "100";
     dest["AM"] = "101";
     dest["AD"] = "110";
@@ -125,4 +125,13 @@ bool cinsHelp::isCinstruction(string instruction) {
     if(isCompBits(compstring) && isJumpBits(jumpstring) && isDestBits(deststring)) return true;
 
     return false;
+}
+
+string cinsHelp::CinstructionToBits() {
+    string res = "111";
+    res += comp[compstring];
+    res += dest[deststring];
+    res += jump[jumpstring];
+
+    return res;
 }

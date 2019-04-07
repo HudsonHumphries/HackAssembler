@@ -34,13 +34,13 @@ int main(int argc, char **argv) {
             string binaryTransform;
             if(isAinstruction(line2)) {
                 binaryTransform = transformAinstruction(line2);
-                outfile << binaryTransform << "\n";
+                outfile << binaryTransform << endl;
             }
             else if(c.isCinstruction(line2)){
-                cout << "CINSTRUCTION" << endl;
+                outfile << c.CinstructionToBits() << endl;
             }
             else {
-                cout << "NOTCORA" << endl;
+                cerr << "A line was not a A or C instruction" << endl;
             }
         }
     }

@@ -45,3 +45,23 @@ string removeSpacesAndComments(string line) {
     return res; 
 }
 
+bool isLabel(string label) {
+    bool left = false;
+    bool right = false;
+    for(int i = 0; i < label.size(); i++) {
+        if(label[i] == '(') left = true;
+        if(label[i] == ')') right = true;
+    }
+    if(left && right) return true;
+
+    return false;
+}
+
+string remove_parentheses(string label) {
+    string res="";
+    for(int i = 0; i < label.size(); i++) {
+        if(label[i] != '(' || label[i] != ')') res.push_back(label[i]);
+    }
+    return res;
+}
+

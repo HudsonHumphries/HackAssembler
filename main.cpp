@@ -4,24 +4,30 @@
 #include "fileHelp.h"
 #include "ainsHelp.h"
 #include "cinsHelp.h"
+#include "SymbolTable.h"
 using namespace std;
 
 int main(int argc, char **argv) {
     string line;
+    int ROM = 0;
+    SymbolTable s;
     ifstream myfile(argv[1]);
     ofstream middlefile("middle.asm");
     if(myfile.is_open()) {
         while(getline(myfile,line)) {
             string myString = removeSpacesAndComments(line);
-            if(emptyLine(line) == false && !(isComment(line))) {
+            if(isLabel(myString)) {
+                //Add label to symboltable with ROM value
+                cout << "ISLABEL" << endl;
+                string label = remove_parentheses(myString);
+                s.addLabel(label,ROM);  //Adds label with the line value that it was at already
+            }
+            else if(!emptyLine(myString)){
+                //Not a label, so moves on to intermediate file
                 middlefile << myString << endl;
                 cout << myString << endl;
-                //Add to file?
+                ROM++; //ROM address only updates when the line is a A or C instruction
             }
-            else {
-                //if label, symboltable
-            }
-            
         }
         myfile.close();
         middlefile.close();

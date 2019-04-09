@@ -14,11 +14,14 @@ class SymbolTable {
         void addSymbol(string symbol);
         void addLabel(string symbol, int ROM);
         int getAddress(string symbol);
+        bool isAinstruction(string s);
+        string int_array_to_string(int *binaryArray);
+        string toBinary(int n);
+        string transformAinstruction(string s);
 
     private:
         unordered_map<string,int> symboltable;
         int address;
-
 };
 
 #endif

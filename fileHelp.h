@@ -60,8 +60,15 @@ bool isLabel(string label) {
 string remove_parentheses(string label) {
     string res="";
     for(int i = 0; i < label.size(); i++) {
-        if(label[i] != '(' || label[i] != ')') res.push_back(label[i]);
+        if(label[i] == '(' || label[i] == ')') {
+            continue;
+        }
+        else {
+            res.push_back(label[i]);
+        }
     }
+    cout << res << endl; //<< ":" << res.size() << endl;
+    res.pop_back();
     return res;
 }
 

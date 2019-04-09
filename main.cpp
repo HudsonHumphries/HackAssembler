@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include "fileHelp.h"
-#include "ainsHelp.h"
 #include "cinsHelp.h"
 #include "SymbolTable.h"
 using namespace std;
@@ -18,7 +17,6 @@ int main(int argc, char **argv) {
             string myString = removeSpacesAndComments(line);
             if(isLabel(myString)) {
                 //Add label to symboltable with ROM value
-                cout << "ISLABEL" << endl;
                 string label = remove_parentheses(myString);
                 s.addLabel(label,ROM);  //Adds label with the line value that it was at already
             }
@@ -39,10 +37,9 @@ int main(int argc, char **argv) {
     string line2;
     if(middlefile2.is_open()) {
         while(getline(middlefile2,line2)) {
-            string binaryTransform;
-            if(isAinstruction(line2)) {
-                binaryTransform = transformAinstruction(line2);
-                outfile << binaryTransform << endl;
+            if(s.isAinstruction(line2)) {
+                
+                outfile << s.transformAinstruction(line2) << endl;
             }
             else if(c.isCinstruction(line2)){
                 outfile << c.CinstructionToBits() << endl;

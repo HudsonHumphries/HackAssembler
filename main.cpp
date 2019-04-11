@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
             if(s.isAinstruction(line2)) {
                 
                 outfile << s.transformAinstruction(line2) << endl;
-                cout << s.transformAinstruction(line2) << endl;
+                //cout << s.transformAinstruction(line2) << endl;
             }
             else if(c.isCinstruction(line2)){
                 outfile << c.CinstructionToBits() << endl;
@@ -48,6 +48,7 @@ int main(int argc, char **argv) {
             }
             else {
                 cerr << "A line was not a A or C instruction" << endl;
+                break;
             }
         }
     }

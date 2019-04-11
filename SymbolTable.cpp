@@ -57,7 +57,9 @@ string SymbolTable::int_array_to_string(int *binaryArray) {
     for(int x =temp; x>=0; x--) {
         binarystring += to_string(binaryArray[x]);
     }
-    cout << binarystring << endl;;
+    //cout << binarystring << endl;;
+    //cout << binarystring.size() << endl;
+    //binarystring.push_back('\n');
     return binarystring;
 }
 string SymbolTable::toBinary(int n) {
@@ -74,12 +76,12 @@ string SymbolTable::toBinary(int n) {
     } 
     for(int j = 15; j > i-1; j--) {
         binaryNum[j] = 0;
-    } 
+    }
     return int_array_to_string(binaryNum);
 }   
 string SymbolTable::transformAinstruction(string s) {
     string ainstruct=s.substr(1,s.size());
-    cout << ainstruct << endl;
+    //cout << ainstruct << endl;
     ainstruct.pop_back();
     if(isdigit(s[1])) { //If @<#>
         string binarynum = s.substr(1,s.size());
@@ -88,7 +90,7 @@ string SymbolTable::transformAinstruction(string s) {
     }
     else if(contains(ainstruct)) { //@Label or @Symbol that is already in the table
         int address = getAddress(ainstruct);
-        cout << address << endl;
+        //cout << address << endl;
         return toBinary(address);
     }
     else {//add symbol to symboltable

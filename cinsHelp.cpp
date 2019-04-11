@@ -172,13 +172,13 @@ bool cinsHelp::isCinstruction(string instruction) {
     jumpstring = "";
     split(instruction);
 
-    cout << "comp: " << compstring << " " << compstring.size() << endl;
+    /*cout << "comp: " << compstring << " " << compstring.size() << endl;
     cout << "jump: " << jumpstring << " " << jumpstring.size() << endl;
-    cout << "dest: " << deststring << " " << deststring.size() << endl; 
+    cout << "dest: " << deststring << " " << deststring.size() << endl;  */
 
     if(isCompBits(compstring) && isJumpBits(jumpstring) && isDestBits(deststring)) return true;
 
-    return true;
+    return false;
 }
 
 string cinsHelp::CinstructionToBits() {

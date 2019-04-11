@@ -67,8 +67,8 @@ string remove_parentheses(string label) {
             res.push_back(label[i]);
         }
     }
-    cout << res << endl; //<< ":" << res.size() << endl;
-    res.pop_back();
+    //cout << res << endl; //<< ":" << res.size() << endl;
+    res.pop_back(); //was a space at the endl
     return res;
 }
 

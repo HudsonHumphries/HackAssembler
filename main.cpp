@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
             else if(!emptyLine(myString)){
                 //Not a label, so moves on to intermediate file
                 middlefile << myString << endl;
-                cout << myString << endl;
+                //cout << myString << endl;
                 ROM++; //ROM address only updates when the line is a A or C instruction
             }
         }
@@ -40,10 +40,11 @@ int main(int argc, char **argv) {
             if(s.isAinstruction(line2)) {
                 
                 outfile << s.transformAinstruction(line2) << endl;
+                cout << s.transformAinstruction(line2) << endl;
             }
             else if(c.isCinstruction(line2)){
                 outfile << c.CinstructionToBits() << endl;
-                cout << c.CinstructionToBits() << endl;
+                //cout << c.CinstructionToBits() << endl;
             }
             else {
                 cerr << "A line was not a A or C instruction" << endl;
